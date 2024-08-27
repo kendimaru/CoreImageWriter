@@ -11,6 +11,10 @@ public class CoreImageWriter {
         case unsupportedExtensionError
     }
     
+    public init() {
+        
+    }
+    
     /// Write CIImage to a file.
     ///
     /// - Parameters:
