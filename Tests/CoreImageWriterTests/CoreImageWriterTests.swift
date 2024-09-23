@@ -33,13 +33,26 @@ func createWhiteImage() -> CGImage? {
     let img = CIImage(cgImage: createWhiteImage()!)
     let writer = CoreImageWriter()
     
+    func assertCanLoadImage(_ url: URL) {
+        let loadedImg = CIImage(contentsOf: url)
+        #expect(loadedImg != nil)
+    }
+    
     @Test(arguments: ["jpg", "jpeg", "png"]) func succeed(ext: String) async {
         var target = URL(filePath: "dest", relativeTo: URL.temporaryDirectory)
         target.appendPathExtension(ext)
         try! writer.write(image: img, to: target)
         
-        let loadedImg = CIImage(contentsOf: target)
-        #expect(loadedImg != nil)
+        assertCanLoadImage(target)
+    }
+    
+    @Test func filepathWithinDirectory() async {
+        let sample = URL(filePath: "sample", relativeTo: URL.temporaryDirectory)
+        try! FileManager.default.createDirectory(at: sample, withIntermediateDirectories: true)
+        let targetWithinDirectory = URL(filePath: "sample/dest.jpg", relativeTo: URL.temporaryDirectory)
+        try! writer.write(image: img, to: targetWithinDirectory)
+        
+        assertCanLoadImage(targetWithinDirectory)
     }
 
     @Test func invalidURLShouldCauseWriteError() async {
