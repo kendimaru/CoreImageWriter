@@ -1,14 +1,11 @@
-CoreImageWriter
-===============
+# CoreImageWriter
 
 Write CIImage to a file easily.
 
-.. image:: https://img.shields.io/badge/License-MIT-yellow.svg
-    :alt: MIT License
+![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 
-Install
--------
+## Install
 
 Set GitHub repository URL using Swift Package Manager.
 
@@ -16,8 +13,7 @@ Set GitHub repository URL using Swift Package Manager.
 2. Enter `https://github.com/kendimaru/CoreImageWriter.git` in search box at upper right of window, press Enter.
 
 
-How To Use
-----------
+## How To Use
 
     let img = CIImage(contentsOf: urlFrom)!
     let writer = CoreImageWriter()
@@ -27,7 +23,6 @@ How To Use
     try! writer.write(image: img, to: urlTo)
 
 
-License
--------
+## License
 
 CoreImageWriter is available under the MIT license.
